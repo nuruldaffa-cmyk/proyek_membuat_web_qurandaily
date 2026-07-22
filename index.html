@@ -6,8 +6,7 @@
     <title>QuranDaily - Baca & Catat Kebaikanmu</title>
     
     <link rel="stylesheet" href="style.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -17,6 +16,7 @@
             <button class="nav-btn active" onclick="switchTab('daily')">📝 Daily</button>
             <button class="nav-btn" onclick="switchTab('sholat')">🕒 Jadwal Shalat</button>
             <button class="nav-btn" onclick="switchTab('quran')">📖 Al-Qur'an</button>
+            <button class="nav-btn" onclick="switchTab('asmaul-husna')">✨ Asmaul Husna</button>
             <button class="nav-btn" onclick="switchTab('kalender-islam')">📅 Kalender Islam</button>
             <button class="theme-toggle-btn" id="btn-tema" onclick="toggleTema()">🌙</button>
         </div>
@@ -24,10 +24,11 @@
 
     <main class="container">
 
+        <!-- TAB DAILY TRACKER & CATATAN BACAAN -->
         <section id="tab-daily" class="tab-content active">
             <div class="section-title">
-                <h2>Daily Ibadah Tracker</h2>
-                <p>Pilih hari ini dan selesaikan target amalan serta surahmu!</p>
+                <h2>Daily Tracker & Catatan</h2>
+                <p>Riwayat surah yang kamu baca otomatis tercatat rapi di sini!</p>
             </div>
 
             <div class="days-tab-container">
@@ -50,7 +51,8 @@
                 </div>
 
                 <div class="days-content-wrapper" id="daily-habits-wrapper">
-                    </div>
+                    <!-- Ditampilkan otomatis oleh JS -->
+                </div>
             </div>
 
             <div class="quote-box">
@@ -59,6 +61,7 @@
             </div>
         </section>
 
+        <!-- TAB JADWAL SHOLAT -->
         <section id="tab-sholat" class="tab-content">
             <div class="section-title">
                 <h2>Jadwal Shalat Hari Ini</h2>
@@ -76,33 +79,104 @@
             <div class="sholat-grid" id="sholat-loading">Memuat jadwal shalat...</div>
         </section>
 
+        <!-- TAB AL-QURAN -->
         <section id="tab-quran" class="tab-content">
             <div class="section-title">
                 <h2>Daftar Surah Al-Qur'an</h2>
                 <p>Silakan pilih surah yang ingin kamu baca hari ini</p>
             </div>
+
+            <!-- Banner Terakhir Dibaca (Bookmark) -->
+            <div id="bookmark-banner" class="bookmark-card" style="display: none;">
+                <div class="bookmark-info">
+                    <strong>📌 Terakhir Dibaca:</strong>
+                    <span id="bookmark-text">Belum ada penanda</span>
+                </div>
+                <button class="btn-resume" onclick="resumeLastRead()">Lanjutkan Baca ➡️</button>
+            </div>
+
+            <div class="search-container" id="search-quran-box">
+                <input 
+                    type="text" 
+                    id="search-surah" 
+                    class="search-input" 
+                    placeholder="🔍 Cari nama surah (contoh: Al-Fatihah, Al-Kahfi)..." 
+                    onkeyup="filterSurah()"
+                >
+            </div>
+
+            <!-- Grid Daftar Surah -->
             <div class="surah-grid" id="daftar-surah">Memuat daftar surah...</div>
+
+            <!-- Area Bacaan Surah -->
             <div id="bacaan-surah" class="bacaan-container" style="display: none;">
-                <button class="back-btn" onclick="kembaliKeDaftar()">⬅️ Kembali ke Daftar Surah</button>
+                <div class="bacaan-header-actions">
+                    <button class="back-btn" onclick="kembaliKeDaftar()">⬅️ Kembali ke Daftar Surah</button>
+                    <button class="toggle-latin-btn" id="btn-toggle-latin" onclick="toggleTeksLatin()">🔤 Sembunyikan Teks Latin</button>
+                </div>
+                
+                <div class="tajwid-guide">
+                    <strong>💡 Panduan Tajwid Warna:</strong>
+                    <span class="t-mad">🔴 Mad</span>
+                    <span class="t-bighunnah">🟢 Idgham Bighunnah</span>
+                    <span class="t-bilaghunnah">🔵 Idgham Bilaghunnah</span>
+                    <span class="t-qalqalah">🟠 Qalqalah</span>
+                    <span class="t-iqlab">🟣 Iqlab</span>
+                    <span class="t-ikhfa">🟡 Ghunnah/Ikhfa</span>
+                </div>
+
                 <div id="isi-ayat"></div>
             </div>
         </section>
 
+        <!-- TAB ASMAUL HUSNA -->
+        <section id="tab-asmaul-husna" class="tab-content">
+            <div class="section-title">
+                <h2>99 Asmaul Husna</h2>
+                <p>Nama-nama Allah yang maha indah beserta artinya</p>
+            </div>
+
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="search-asmaul" 
+                    class="search-input" 
+                    placeholder="🔍 Cari Asmaul Husna (contoh: Ar-Rahman, Pengasih)..." 
+                    onkeyup="filterAsmaulHusna()"
+                >
+            </div>
+
+            <div class="asmaul-grid" id="daftar-asmaul-husna">
+                Memuat Asmaul Husna...
+            </div>
+        </section>
+
+        <!-- TAB KALENDER ISLAM -->
         <section id="tab-kalender-islam" class="tab-content">
             <div class="section-title">
-                <h2>Kalender Hijriah & Agenda Ibadah</h2>
-                <p>Pantau tanggal Hijriah, puasa sunnah, dan hari besar Islam secara real-time</p>
+                <h2>Kalender Ibadah & Agenda Islam Indonesia</h2>
+                <p>Pantau puasa sunnah, Ayyamul Bidh, amalan hari Jumat, dan hari besar keagamaan</p>
             </div>
-            <div class="calendar-wrapper">
-                <div class="sholat-card" style="text-align: center; padding: 25px;">
-                    <h3 style="color: #198754; margin-bottom: 10px;">📅 Info Hari Ini</h3>
-                    <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 5px;" id="text-hijriah">Memuat...</div>
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;" id="text-masehi-cal"></div>
-                    <div id="alert-puasa" style="padding: 12px; border-radius: 8px; font-weight: 500; font-size: 0.9rem; line-height: 1.4; display: none;"></div>
+
+            <div class="calendar-box">
+                <div class="calendar-header">
+                    <button onclick="changeMonth(-1)">⬅️ Bulan Sebelumnya</button>
+                    <h3 id="cal-month-year">Januari 2026</h3>
+                    <button onclick="changeMonth(1)">Bulan Berikutnya ➡️</button>
                 </div>
-                <div class="sholat-card" style="padding: 20px;">
-                    <h3 style="color: #198754; margin-bottom: 15px; font-size: 1.2rem;">🌟 Agenda Ibadah 2026</h3>
-                    <ul class="agenda-list" id="daftar-agenda-islam"></ul>
+
+                <div class="calendar-weekdays">
+                    <div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div>
+                </div>
+
+                <div class="calendar-days" id="calendar-days-grid"></div>
+
+                <div class="calendar-legend">
+                    <span class="legend-item"><i class="dot-seninkamis"></i> Puasa Senin-Kamis</span>
+                    <span class="legend-item"><i class="dot-jumat"></i> Sunnah Jumat (Al-Kahfi)</span>
+                    <span class="legend-item"><i class="dot-ayyamul"></i> Ayyamul Bidh</span>
+                    <span class="legend-item"><i class="dot-puasakhusus"></i> Puasa Khusus</span>
+                    <span class="legend-item"><i class="dot-event"></i> Hari Besar Islam</span>
                 </div>
             </div>
         </section>
@@ -113,168 +187,349 @@
         <p>&copy; 2026 QuranDaily. Dikembangkan oleh Muhammad Nurul Daffa & AI ✨</p>
     </footer>
 
+    <!-- JAVASCRIPT SISTEM -->
     <script>
-        // 1. DATA TARGET SURAH MINGGUAN AUTOMATIC
-        const weeklySurahData = [
-            {
-                senin: { title: "QS. Al-Mulk", desc: "Ayat 1 - 30 (Surah Panjang)", list: ["Membaca Surah Al-Mulk", "Dzikir Pagi", "Dzikir Petang"] },
-                selasa: { title: "QS. An-Naba & An-Naziat", desc: "Surah Pendek / Juz Amma", list: ["Membaca Surah An-Naba", "Membaca Surah An-Naziat", "Dzikir Pagi & Petang"] },
-                rabu: { title: "QS. Ar-Rahman", desc: "Ayat 1 - 78 (Surah Panjang)", list: ["Membaca Surah Ar-Rahman", "Dzikir Pagi", "Dzikir Petang"] },
-                kamis: { title: "QS. Yasin", desc: "Ayat 1 - 83 (Surah Panjang)", list: ["Membaca Surah Yasin", "Dzikir Pagi", "Dzikir Petang"] },
-                jumat: { title: "QS. Al-Kahfi", desc: "Ayat 1 - 110 (Sunnah Utama)", list: ["Membaca Surah Al-Kahfi", "Shalawat Nabi 100x", "Dzikir Sore"] },
-                sabtu: { title: "QS. Al-Waqi'ah", desc: "Ayat 1 - 96 (Surah Panjang)", list: ["Membaca Surah Al-Waqi'ah", "Dzikir Pagi", "Dzikir Petang"] },
-                minggu: { title: "QS. Al-Ikhlas, Al-Falaq, An-Nas", desc: "3 Qul (Surah Pendek)", list: ["Membaca Surah Al-Ikhlas 3x", "Membaca Surah Al-Falaq", "Membaca Surah An-Nas"] }
-            },
-            {
-                senin: { title: "QS. As-Sajdah", desc: "Ayat 1 - 30 (Surah Panjang)", list: ["Membaca Surah As-Sajdah", "Dzikir Pagi", "Dzikir Petang"] },
-                selasa: { title: "QS. Ad-Duha, Al-Insyirah, At-Tin", desc: "Surah-Surah Pendek", list: ["Membaca Surah Ad-Duha", "Membaca Surah Al-Insyirah", "Membaca Surah At-Tin"] },
-                rabu: { title: "QS. Al-Insan", desc: "Ayat 1 - 31 (Surah Panjang)", list: ["Membaca Surah Al-Insan", "Dzikir Pagi", "Dzikir Petang"] },
-                kamis: { title: "QS. Al-Jumu'ah", desc: "Ayat 1 - 11 (Surah Pendek)", list: ["Membaca Surah Al-Jumu'ah", "Dzikir Pagi", "Dzikir Petang"] },
-                jumat: { title: "QS. Al-Kahfi", desc: "Ayat 1 - 110 (Utamakan Jumat)", list: ["Membaca Surah Al-Kahfi", "Shalawat Nabi 100x", "Dzikir Sore"] },
-                sabtu: { title: "QS. Al-Hujurat", desc: "Ayat 1 - 18 (Surah Sedang)", list: ["Membaca Surah Al-Hujurat", "Dzikir Pagi", "Dzikir Petang"] },
-                minggu: { title: "QS. Al-Qadr, Al-A'la, Al-Ghasyiyah", desc: "Surah Pendek Pilihan", list: ["Membaca Surah Al-Qadr", "Membaca Surah Al-A'la", "Membaca Surah Al-Ghasyiyah"] }
-            }
-        ];
+        let surahListGlobal = [];
+        let showTeksLatin = true; 
 
-        function getWeekNumber() {
-            const d = new Date();
-            d.setHours(0, 0, 0, 0);
-            d.setDate(d.getDate() + 4 - (d.getDay() || 7));
-            const yearStart = new Date(d.getFullYear(), 0, 1);
-            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-        }
-
+        // 1. SISTEM DAILY TRACKER & CATATAN BACAAN
         function generateDailyTracker() {
-            const weekNum = getWeekNumber();
-            const currentDataIdx = weekNum % weeklySurahData.length; 
-            const data = weeklySurahData[currentDataIdx];
             const container = document.getElementById('daily-habits-wrapper');
             if(!container) return;
-            
+
             const days = ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu'];
             let htmlContent = '';
 
             days.forEach(day => {
-                const dayData = data[day];
                 const dayCapital = day.charAt(0).toUpperCase() + day.slice(1);
-                let habitItemsHtml = '';
-                dayData.list.forEach((habit, idx) => {
-                    const idCheck = `${day.substring(0,2)}${idx+1}`;
-                    habitItemsHtml += `
-                        <div class="habit-item">
-                            <input type="checkbox" id="${idCheck}" class="habit-checkbox" onchange="saveProgress()">
-                            <span class="habit-icon">${habit.includes('Membaca') ? '📖' : '📿'}</span>
-                            <label for="${idCheck}">${habit}</label>
-                        </div>
-                    `;
-                });
+                
+                const savedLogs = JSON.parse(localStorage.getItem(`read_logs_${day}`) || '[]');
+                
+                let logListHtml = '';
+                if(savedLogs.length === 0) {
+                    logListHtml = `<li class="empty-log">Belum ada surah yang dibaca/dicatat hari ini.</li>`;
+                } else {
+                    savedLogs.forEach((item, idx) => {
+                        logListHtml += `
+                            <li class="log-item">
+                                <span>📖 <strong>${item.nama}</strong> (${item.waktu})</span>
+                                <button class="btn-del-log" onclick="removeLog('${day}', ${idx})">❌</button>
+                            </li>
+                        `;
+                    });
+                }
 
                 htmlContent += `
                     <div class="day-content ${day}-content">
-                        <div class="quran-target-card" ${day === 'jumat' ? 'style="border-left-color: #20c997;"' : ''}>
-                            <span class="quran-target-icon" ${day === 'jumat' ? 'style="background: rgba(32, 201, 151, 0.1);"' : ''}>📖</span>
-                            <div class="quran-target-text">
-                                <h5>Target Surah Hari ${dayCapital}</h5>
-                                <h4>${dayData.title}</h4>
-                                <small>Target: ${dayData.desc}</small>
+                        <div class="notebook-card">
+                            <div class="notebook-header">
+                                📓 <h4>Buku Catatan Bacaan Hari ${dayCapital}</h4>
+                            </div>
+                            <ul class="notebook-list">
+                                ${logListHtml}
+                            </ul>
+                        </div>
+
+                        <div class="habit-list-container">
+                            <div class="habit-item">
+                                <input type="checkbox" id="chk_${day}_2" class="habit-checkbox" onchange="saveProgress()">
+                                <span class="habit-icon">🌅</span>
+                                <label for="chk_${day}_2">Tilawah Rutin Setelah Subuh</label>
+                            </div>
+                            <div class="habit-item">
+                                <input type="checkbox" id="chk_${day}_3" class="habit-checkbox" onchange="saveProgress()">
+                                <span class="habit-icon">🌌</span>
+                                <label for="chk_${day}_3">Tilawah Malam / Sebelum Tidur</label>
                             </div>
                         </div>
-                        <div class="habit-list-container">${habitItemsHtml}</div>
                     </div>
                 `;
             });
+
             container.innerHTML = htmlContent;
             loadSavedProgress();
         }
 
-        // 2. LOGIKA HITUNG KALENDER ISLAM & REMINDER PUASA AUTOMATIC
-        function hitungKalenderDanPuasa() {
-            const hariIni = new Date();
-            const namaHari = hariIni.toLocaleDateString('id-ID', { weekday: 'long' });
-            
-            const baseMasehi = new Date(2026, 5, 25); 
-            const diffTime = hariIni - baseMasehi;
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            
-            let hHari = (10 + diffDays) % 30;
-            if(hHari <= 0) hHari += 30;
-            let hBulan = "Muharram";
-            let hTahun = 1448;
+        function catatSurahKeJurnal(namaSurah) {
+            const days = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+            const todayName = days[new Date().getDay()];
+            const jam = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
-            if (diffDays < -10) { hBulan = "Zulhijjah"; hTahun = 1447; hHari = 30 + (diffDays + 10); }
+            let currentLogs = JSON.parse(localStorage.getItem(`read_logs_${todayName}`) || '[]');
+            currentLogs.push({ nama: namaSurah, waktu: jam });
+            localStorage.setItem(`read_logs_${todayName}`, JSON.stringify(currentLogs));
 
-            const tanggalHijriahText = `${hHari} ${hBulan} ${hTahun} H`;
-            const infoMasehiText = hariIni.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-            
-            document.getElementById('text-hijriah').innerText = tanggalHijriahText;
-            document.getElementById('text-masehi-cal').innerText = infoMasehiText;
-
-            const alertBox = document.getElementById('alert-puasa');
-            alertBox.style.display = "none";
-
-            if (namaHari === "Senin" || namaHari === "Kamis") {
-                alertBox.style.display = "block";
-                alertBox.style.background = "rgba(25, 135, 84, 0.1)";
-                alertBox.style.color = "#0f5132";
-                alertBox.style.border = "1px solid #198754";
-                alertBox.innerText = `📢 Sunnah Hari Ini: Semangat! Hari ini hari ${namaHari}, waktunya amalkan Puasa Sunnah Senin-Kamis.`;
-            }
-            if (hHari === 13 || hHari === 14 || hHari === 15) {
-                alertBox.style.display = "block";
-                alertBox.style.background = "rgba(13, 110, 253, 0.1)";
-                alertBox.style.color = "#0a58ca";
-                alertBox.style.border = "1px solid #0d6efd";
-                alertBox.innerText = `🌕 Pengingat Puasa: Hari ini tanggal ${hHari} ${hBulan}. Waktunya Puasa Sunnah Ayyamul Bidh!`;
-            }
-
-            const agendaContainer = document.getElementById('daftar-agenda-islam');
-            const agendaData = [
-                { tanggal: "Setiap Senin & Kamis", nama: "Puasa Sunnah Senin-Kamis", tipe: "Rutin" },
-                { tanggal: "13, 14, 15 tiap bulan Hijriah", nama: "Puasa Sunnah Ayyamul Bidh", tipe: "Bulanan" },
-                { tanggal: "19 Feb - 20 Mar 2026", nama: "Bulan Suci Ramadan 1447 H", tipe: "Wajib" },
-                { tanggal: "21 - 22 Maret 2026", nama: "Hari Raya Idul Fitri 1447 H", tipe: "Besar" },
-                { tanggal: "27 Mei 2026", nama: "Hari Raya Idul Adha 1447 H", tipe: "Besar" },
-                { tanggal: "16 Juni 2026", nama: "Tahun Baru Islam 1 Muharram 1448 H", tipe: "Besar" }
-            ];
-
-            let htmlAgenda = "";
-            agendaData.forEach(item => {
-                let badgeColor = "#6c757d";
-                if(item.tipe === "Rutin") badgeColor = "#198754";
-                if(item.tipe === "Bulanan") badgeColor = "#0d6efd";
-                if(item.tipe === "Wajib") badgeColor = "#fd7e14";
-                if(item.tipe === "Besar") badgeColor = "#dc3545";
-
-                htmlAgenda += `
-                    <li class="agenda-item" style="border-left: 4px solid ${badgeColor};">
-                        <div>
-                            <strong style="display:block; font-size:0.95rem;">${item.nama}</strong>
-                            <small style="color:var(--text-muted); font-size:0.8rem;">📅 ${item.tanggal}</small>
-                        </div>
-                        <span style="font-size: 0.75rem; padding: 3px 8px; background: ${badgeColor}; color: white; border-radius: 12px; font-weight: bold;">${item.tipe}</span>
-                    </li>
-                `;
-            });
-            agendaContainer.innerHTML = htmlAgenda;
+            generateDailyTracker();
+            alert(`✨ MasyaAllah! "${namaSurah}" berhasil dicatat ke Daily Hari ${todayName.toUpperCase()}!`);
         }
 
-        // 3. TAB NAVIGASI SYSTEM
+        function removeLog(day, index) {
+            let currentLogs = JSON.parse(localStorage.getItem(`read_logs_${day}`) || '[]');
+            currentLogs.splice(index, 1);
+            localStorage.setItem(`read_logs_${day}`, JSON.stringify(currentLogs));
+            generateDailyTracker();
+        }
+
+        // 2. TOGGLE LATIN READABILITY
+        function toggleTeksLatin() {
+            showTeksLatin = !showTeksLatin;
+            const btn = document.getElementById('btn-toggle-latin');
+            const latinElements = document.querySelectorAll('.latin-text');
+
+            latinElements.forEach(el => {
+                el.style.display = showTeksLatin ? 'block' : 'none';
+            });
+
+            if (btn) {
+                btn.textContent = showTeksLatin ? "🔤 Sembunyikan Teks Latin" : "🔤 Tampilkan Teks Latin";
+            }
+        }
+
+        // 3. ASMAUL HUSNA
+        async function loadAsmaulHusna() {
+            const container = document.getElementById('daftar-asmaul-husna');
+            if (!container || container.innerHTML.trim() !== "Memuat Asmaul Husna...") return;
+
+            try {
+                const res = await fetch('https://api.myquran.com/v2/husna/semua');
+                const data = await res.json();
+                
+                let html = '';
+                data.data.forEach(item => {
+                    html += `
+                        <div class="asmaul-card">
+                            <div class="asmaul-num">${item.id}</div>
+                            <div class="asmaul-arabic">${item.arab}</div>
+                            <div class="asmaul-latin">${item.latin}</div>
+                            <div class="asmaul-indo">${item.indo}</div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (e) {
+                container.innerHTML = "Gagal memuat data Asmaul Husna.";
+            }
+        }
+
+        function filterAsmaulHusna() {
+            const input = document.getElementById('search-asmaul').value.toLowerCase();
+            const cards = document.querySelectorAll('#daftar-asmaul-husna .asmaul-card');
+
+            cards.forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(input) ? "flex" : "none";
+            });
+        }
+
+        // 4. BOOKMARK SYSTEM
+        let lastReadData = JSON.parse(localStorage.getItem('quran_bookmark') || 'null');
+
+        function saveBookmark(nomorSurah, namaSurah, nomorAyat) {
+            lastReadData = { nomorSurah, namaSurah, nomorAyat };
+            localStorage.setItem('quran_bookmark', JSON.stringify(lastReadData));
+            updateBookmarkBanner();
+            alert(`📌 Terakhir dibaca tersimpan: ${namaSurah} Ayat ${nomorAyat}`);
+        }
+
+        function updateBookmarkBanner() {
+            const banner = document.getElementById('bookmark-banner');
+            const text = document.getElementById('bookmark-text');
+            if (lastReadData && banner && text) {
+                text.innerText = `${lastReadData.namaSurah} (Ayat ${lastReadData.nomorAyat})`;
+                banner.style.display = 'flex';
+            }
+        }
+
+        function resumeLastRead() {
+            if (lastReadData) {
+                bacaSurah(lastReadData.nomorSurah, lastReadData.nomorAyat);
+            }
+        }
+
+        // 5. TAJWID HIGHLIGHTER LENGKAP
+        function highlightTajwid(text) {
+            if(!text) return "";
+            let result = text;
+
+            // 1. Mad (Panjang) -> Merah
+            result = result.replace(/([\u0653\u0670\u06E5\u06E6])/g, '<span class="t-mad">$1</span>');
+            
+            // 2. Qalqalah (B, J, D, Tha, Qaf Sukun) -> Orange
+            result = result.replace(/([بجدطق][\u0652])/g, '<span class="t-qalqalah">$1</span>');
+
+            // 3. Iqlab (Sukun/Tanwin bertemu Ba) -> Ungu
+            result = result.replace(/([\u064B\u064C\u064D\u0652][\s]*[ب])/g, '<span class="t-iqlab">$1</span>');
+
+            // 4. Idgham Bighunnah (Dengung: Ya, Nun, Mim, Wau) -> Hijau Tua
+            result = result.replace(/([\u064B\u064C\u064D\u0652][\s]*[ينمو])/g, '<span class="t-bighunnah">$1</span>');
+
+            // 5. Idgham Bilaghunnah (Tanpa Dengung: Lam, Ra) -> Biru
+            result = result.replace(/([\u064B\u064C\u064D\u0652][\s]*[لر])/g, '<span class="t-bilaghunnah">$1</span>');
+
+            // 6. Ghunnah & Ikhfa (Dengung/Samar) -> Kuning
+            result = result.replace(/([نم][\u0651])/g, '<span class="t-ikhfa">$1</span>');
+
+            return result;
+        }
+
+        // 6. FETCH SURAH & BACAAN AYAT
+        async function loadDaftarSurah() {
+            const grid = document.getElementById('daftar-surah');
+            if(!grid || grid.innerHTML !== "Memuat daftar surah...") return;
+            try {
+                const res = await fetch('https://equran.id/api/v2/surat');
+                const r = await res.json();
+                surahListGlobal = r.data;
+                grid.innerHTML = "";
+                r.data.forEach(s => {
+                    grid.innerHTML += `<div class="surah-box" onclick="bacaSurah(${s.nomor})"><div><strong>${s.nomor}. ${s.namaLatin}</strong><br><small>${s.arti} (${s.jumlahAyat} Ayat)</small></div><div class="arabic-title">${s.nama}</div></div>`;
+                });
+                updateBookmarkBanner();
+            } catch (e) { grid.innerHTML = "Gagal memuat Al-Qur'an."; }
+        }
+
+        async function bacaSurah(n, jumpToAyat = null) {
+            document.getElementById('daftar-surah').style.display = 'none';
+            document.getElementById('search-quran-box').style.display = 'none';
+            if(document.getElementById('bookmark-banner')) document.getElementById('bookmark-banner').style.display = 'none';
+
+            const sec = document.getElementById('bacaan-surah');
+            const isi = document.getElementById('isi-ayat');
+            sec.style.display = 'block'; 
+            isi.innerHTML = "Memuat ayat...";
+
+            try {
+                const res = await fetch(`https://equran.id/api/v2/surat/${n}`); 
+                const r = await res.json(); 
+                const s = r.data;
+
+                let html = `<h3 style="text-align:center; margin-bottom:20px; color:#198754;">${s.namaLatin}</h3>`;
+                if(s.bismillah) {
+                    html += `<div class="arab-text arab-tajwid" style="text-align:center;">${highlightTajwid(s.bismillah.teksArab)}</div>`;
+                }
+
+                s.ayat.forEach(a => { 
+                    const arabColorized = highlightTajwid(a.teksArab);
+                    const latinDisplay = showTeksLatin ? 'block' : 'none';
+
+                    html += `
+                        <div class="ayat-item" id="ayat-${a.nomorAyat}">
+                            <div class="arab-text arab-tajwid">${arabColorized} <span class="ayat-num">(${a.nomorAyat})</span></div>
+                            <div class="latin-text" style="display: ${latinDisplay};"><em>"${a.teksLatin}"</em></div>
+                            <div class="indo-text">${a.nomorAyat}. ${a.teksIndonesia}</div>
+                            <button class="btn-bookmark-item" onclick="saveBookmark(${n}, '${s.namaLatin}', ${a.nomorAyat})">📌 Tandai Terakhir Dibaca</button>
+                        </div>
+                    `; 
+                });
+                
+                html += `
+                    <div class="done-btn-container">
+                        <button class="done-btn" onclick="catatSurahKeJurnal('${s.namaLatin}')">📓 Catat Surah Ini ke Daily</button>
+                    </div>
+                `;
+
+                isi.innerHTML = html;
+
+                if (jumpToAyat) {
+                    setTimeout(() => {
+                        const targetAyat = document.getElementById(`ayat-${jumpToAyat}`);
+                        if (targetAyat) targetAyat.scrollIntoView({ behavior: 'smooth' });
+                    }, 500);
+                }
+
+            } catch (e) { isi.innerHTML = "Gagal memuat ayat."; }
+        }
+
+        function kembaliKeDaftar() { 
+            document.getElementById('bacaan-surah').style.display = 'none'; 
+            document.getElementById('daftar-surah').style.display = 'grid'; 
+            document.getElementById('search-quran-box').style.display = 'flex';
+            updateBookmarkBanner();
+        }
+
+        function filterSurah() {
+            const input = document.getElementById('search-surah').value.toLowerCase();
+            const boxes = document.querySelectorAll('#daftar-surah .surah-box');
+            boxes.forEach(box => {
+                box.style.display = box.textContent.toLowerCase().includes(input) ? "flex" : "none";
+            });
+        }
+
+        // 7. KALENDER ISLAM
+        let currentCalDate = new Date();
+        const islamicEvents = {
+            "2026-01-16": { name: "Isra Miraj 1447 H", type: "event" },
+            "2026-02-19": { name: "Awal Ramadan 1447 H (Puasa Wajib)", type: "event" },
+            "2026-03-21": { name: "Hari Raya Idul Fitri 1447 H", type: "event" },
+            "2026-05-26": { name: "Puasa Sunnah Arafah (9 Zulhijjah)", type: "puasa" },
+            "2026-05-27": { name: "Hari Raya Idul Adha 1447 H", type: "event" },
+            "2026-06-16": { name: "Tahun Baru Islam 1448 H", type: "event" }
+        };
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendar-days-grid');
+            const titleMonthYear = document.getElementById('cal-month-year');
+            if (!grid) return;
+
+            const year = currentCalDate.getFullYear();
+            const month = currentCalDate.getMonth();
+            const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            
+            titleMonthYear.innerText = `${namaBulan[month]} ${year}`;
+            grid.innerHTML = "";
+
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const totalDays = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDayIndex; i++) grid.innerHTML += `<div class="cal-day empty"></div>`;
+
+            const today = new Date();
+            for (let day = 1; day <= totalDays; day++) {
+                const dateObj = new Date(year, month, day);
+                const dayOfWeek = dateObj.getDay();
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+                let isToday = (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) ? "today" : "";
+                let badgesHtml = "";
+
+                if (dayOfWeek === 1 || dayOfWeek === 4) badgesHtml += `<span class="badge-tag bg-seninkamis">Puasa Sunnah</span>`;
+                if (dayOfWeek === 5) badgesHtml += `<span class="badge-tag bg-jumat">Sunnah Al-Kahfi</span>`;
+                if (day === 13 || day === 14 || day === 15) badgesHtml += `<span class="badge-tag bg-ayyamul">Ayyamul Bidh</span>`;
+
+                if (islamicEvents[dateStr]) {
+                    const ev = islamicEvents[dateStr];
+                    badgesHtml += `<span class="badge-tag ${ev.type === 'event' ? 'bg-event' : 'bg-puasakhusus'}">${ev.name}</span>`;
+                }
+
+                grid.innerHTML += `
+                    <div class="cal-day ${isToday}">
+                        <span class="day-number">${day}</span>
+                        <div class="badge-container">${badgesHtml}</div>
+                    </div>
+                `;
+            }
+        }
+
+        function changeMonth(direction) {
+            currentCalDate.setMonth(currentCalDate.getMonth() + direction);
+            renderCalendar();
+        }
+
+        // 8. NAVIGASI TAB & UTILS
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.nav-links .nav-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(`tab-${tabName}`).classList.add('active');
             
             const buttons = document.querySelectorAll('.nav-links .nav-btn');
-            buttons.forEach(btn => {
-                if(btn.getAttribute('onclick').includes(tabName)) btn.classList.add('active');
-            });
+            buttons.forEach(btn => { if(btn.getAttribute('onclick').includes(tabName)) btn.classList.add('active'); });
 
+            if (tabName === 'daily') generateDailyTracker();
             if (tabName === 'sholat') { loadJadwalShalat(); updateTimeAndDate(); }
             if (tabName === 'quran') loadDaftarSurah();
-            if (tabName === 'kalender-islam') hitungKalenderDanPuasa();
+            if (tabName === 'asmaul-husna') loadAsmaulHusna();
+            if (tabName === 'kalender-islam') renderCalendar();
         }
 
-        // 4. SISTEM CHEKLIST STORAGE
         function loadSavedProgress() {
             document.querySelectorAll('.habit-checkbox').forEach(cb => {
                 if (localStorage.getItem(cb.id) === 'true') cb.checked = true;
@@ -286,7 +541,6 @@
             });
         }
 
-        // 5. THEME DAN JAM DIGITAL OTO
         function toggleTema() {
             document.body.classList.toggle('dark-mode');
             document.getElementById('btn-tema').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
@@ -304,7 +558,6 @@
         }
         setInterval(updateTimeAndDate, 1000);
 
-        // 6. FETCH JADWAL SHALAT & QURAN API
         let currentCityId = '1301'; 
         function changeZone(zone, area) {
             document.querySelectorAll('.zone-selector .zone-btn').forEach(btn => btn.classList.remove('active'));
@@ -333,37 +586,9 @@
             } catch (e) { container.innerHTML = "Gagal memuat jadwal."; }
         }
 
-        async function loadDaftarSurah() {
-            const grid = document.getElementById('daftar-surah');
-            if(!grid || grid.innerHTML !== "Memuat daftar surah...") return;
-            try {
-                const res = await fetch('https://equran.id/api/v2/surat'); const r = await res.json();
-                grid.innerHTML = "";
-                r.data.forEach(s => {
-                    grid.innerHTML += `<div class="surah-box" onclick="bacaSurah(${s.nomor})"><div><strong>${s.nomor}. ${s.namaLatin}</strong><br><small>${s.arti} (${s.jumlahAyat} Ayat)</small></div><div class="arabic-title">${s.nama}</div></div>`;
-                });
-            } catch (e) { grid.innerHTML = "Gagal memuat Al-Qur'an."; }
-        }
-
-        async function bacaSurah(n) {
-            document.getElementById('daftar-surah').style.display = 'none';
-            const sec = document.getElementById('bacaan-surah'); const isi = document.getElementById('isi-ayat');
-            sec.style.display = 'block'; isi.innerHTML = "Memuat ayat...";
-            try {
-                const res = await fetch(`https://equran.id/api/v2/surat/${n}`); const r = await res.json(); const s = r.data;
-                let html = `<h3 style="text-align:center; margin-bottom:20px; color:#198754;">${s.namaLatin}</h3>`;
-                if(s.bismillah) html += `<div class="arab-text" style="text-align:center;">${s.bismillah.teksArab}</div>`;
-                s.ayat.forEach(a => { html += `<div class="ayat-item"><div class="arab-text">${a.teksArab} <span>(${a.nomorAyat})</span></div><div class="indo-text">${a.nomorAyat}. ${a.teksIndonesia}</div></div>`; });
-                isi.innerHTML = html;
-            } catch (e) { isi.innerHTML = "Gagal memuat ayat."; }
-        }
-        function kembaliKeDaftar() { document.getElementById('bacaan-surah').style.display = 'none'; document.getElementById('daftar-surah').style.display = 'grid'; }
-
-        // DATA QUOTES INSPIRASI
         const quotes = [
             "\"Maka sesungguhnya beserta kesulitan ada kemudahan.\" — (QS. Al-Insyirah: 5)",
-            "\"Amalan yang paling dicintai oleh Allah adalah yang terus-menerus dilakukan meskipun sedikit.\" — HR. Bukhari",
-            "\"Jadikan sabar dan shalat sebagai penolongmu.\" — (QS. Al-Baqarah: 45)"
+            "\"Amalan yang paling dicintai oleh Allah adalah yang terus-menerus dilakukan meskipun sedikit.\" — HR. Bukhari"
         ];
         
         window.addEventListener('DOMContentLoaded', () => {
