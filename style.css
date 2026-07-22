@@ -26,11 +26,7 @@ body.dark-mode {
 /* ================================================== */
 /* 2. BASE STYLES                                     */
 /* ================================================== */
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body { 
     font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -41,81 +37,38 @@ body {
     font-size: 16px;
 }
 
-.container { 
-    max-width: 900px; 
-    margin: 2rem auto; 
-    padding: 0 1rem; 
-    min-height: 70vh; 
-}
+.container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; min-height: 70vh; }
 
 /* ================================================== */
 /* 3. NAVBAR & NAVIGATION                             */
 /* ================================================== */
 .navbar { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    background-color: #0f5132; 
-    padding: 1rem 5%; 
-    color: white; 
-    position: sticky; 
-    top: 0; 
-    z-index: 100; 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: flex; justify-content: space-between; align-items: center; 
+    background-color: #0f5132; padding: 1rem 5%; color: white; 
+    position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
-.logo { 
-    font-size: 1.4rem; 
-    font-weight: bold; 
-    letter-spacing: 0.5px; 
-}
-
+.logo { font-size: 1.4rem; font-weight: bold; letter-spacing: 0.5px; }
 .nav-links { display: flex; gap: 10px; align-items: center; }
 
 .nav-btn { 
-    background: none; 
-    border: none; 
-    color: #a3cfbb; 
-    font-size: 1rem; 
-    font-weight: 600; 
-    padding: 8px 16px; 
-    cursor: pointer; 
-    border-radius: 6px; 
+    background: none; border: none; color: #a3cfbb; font-size: 1rem; 
+    font-weight: 600; padding: 8px 16px; cursor: pointer; border-radius: 6px; 
     transition: all 0.3s ease; 
 }
 
-.nav-btn:hover, .nav-btn.active { 
-    color: white; 
-    background-color: #146c43; 
-}
+.nav-btn:hover, .nav-btn.active { color: white; background-color: #146c43; }
 
-/* Aturan Navbar Khusus Dark Mode */
-body.dark-mode .navbar {
-    background: #1e1e1e;
-    border-bottom: 2px solid #2d2d2d;
-    box-shadow: none;
-}
+body.dark-mode .navbar { background: #1e1e1e; border-bottom: 2px solid #2d2d2d; box-shadow: none; }
 body.dark-mode .logo { color: #20c997; }
 body.dark-mode .nav-btn { color: #a0a0a0; }
-body.dark-mode .nav-btn.active { 
-    background: #20c997; 
-    color: #121212; 
-}
+body.dark-mode .nav-btn.active { background: #20c997; color: #121212; }
 
 .theme-toggle-btn { 
-    background: #146c43; 
-    border: none; 
-    color: white; 
-    padding: 8px 12px; 
-    border-radius: 50px; 
-    cursor: pointer; 
-    font-size: 1rem; 
-    transition: all 0.2s ease; 
+    background: #146c43; border: none; color: white; padding: 8px 12px; 
+    border-radius: 50px; cursor: pointer; font-size: 1rem; transition: all 0.2s ease; 
 }
-.theme-toggle-btn:hover { 
-    background-color: #198754; 
-    transform: scale(1.05); 
-}
+.theme-toggle-btn:hover { background-color: #198754; transform: scale(1.05); }
 
 /* ================================================== */
 /* 4. LAYOUT COMPONENTS & CARDS                       */
@@ -133,21 +86,9 @@ body.dark-mode .nav-btn.active {
 body.dark-mode .section-title h2 { color: #20c997; }
 .section-title p { color: var(--text-muted); font-size: 1rem; }
 
-.card { 
-    background: var(--bg-card); 
-    padding: 2rem; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 12px var(--shadow); 
-    border: 1px solid var(--border-color); 
-}
-
-/* Widget Info Jam / Digital Clock */
 .widget-info { 
-    text-align: center; 
-    margin-bottom: 20px; 
-    padding: 15px; 
-    background: rgba(25, 135, 84, 0.1); 
-    border-radius: 8px; 
+    text-align: center; margin-bottom: 20px; padding: 15px; 
+    background: rgba(25, 135, 84, 0.1); border-radius: 8px; 
 }
 body.dark-mode .widget-info { background: rgba(32, 201, 151, 0.1); }
 
@@ -156,35 +97,21 @@ body.dark-mode .live-clock { color: #20c997; }
 .live-date { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
 
 /* ================================================== */
-/* 5. DAILY TRACKER SYSTEM STYLING                    */
+/* 5. DAILY TRACKER & NOTEBOOK CARD                   */
 /* ================================================== */
 .days-tab-container input[type="radio"] { display: none; }
 
 .days-nav {
-    display: flex;
-    justify-content: space-between;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    padding: 6px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px var(--shadow);
+    display: flex; justify-content: space-between; background: var(--bg-card);
+    border: 1px solid var(--border-color); padding: 6px; border-radius: 12px;
+    margin-bottom: 20px; box-shadow: 0 4px 10px var(--shadow);
 }
 .days-nav label {
-    flex: 1;
-    text-align: center;
-    padding: 10px 5px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border-radius: 8px;
-    color: var(--text-muted);
+    flex: 1; text-align: center; padding: 10px 5px; font-weight: 700;
+    font-size: 0.9rem; cursor: pointer; border-radius: 8px; color: var(--text-muted);
     transition: all 0.2s ease;
 }
-.days-nav label:hover {
-    background: rgba(25, 135, 84, 0.05);
-    color: #198754;
-}
+.days-nav label:hover { background: rgba(25, 135, 84, 0.05); color: #198754; }
 
 .days-content-wrapper { position: relative; }
 .day-content { display: none; animation: slideUpContent 0.3s ease-out; }
@@ -200,9 +127,7 @@ body.dark-mode .live-clock { color: #20c997; }
 #day-jumat:checked ~ .days-nav label[for="day-jumat"],
 #day-sabtu:checked ~ .days-nav label[for="day-sabtu"],
 #day-minggu:checked ~ .days-nav label[for="day-minggu"] {
-    background: #198754;
-    color: white;
-    font-weight: bold;
+    background: #198754; color: white; font-weight: bold;
 }
 body.dark-mode #day-senin:checked ~ .days-nav label[for="day-senin"],
 body.dark-mode #day-selasa:checked ~ .days-nav label[for="day-selasa"],
@@ -211,9 +136,7 @@ body.dark-mode #day-kamis:checked ~ .days-nav label[for="day-kamis"],
 body.dark-mode #day-jumat:checked ~ .days-nav label[for="day-jumat"],
 body.dark-mode #day-sabtu:checked ~ .days-nav label[for="day-sabtu"],
 body.dark-mode #day-minggu:checked ~ .days-nav label[for="day-minggu"] {
-    background: #20c997; 
-    color: #121212; 
-    font-weight: bold;
+    background: #20c997; color: #121212; font-weight: bold;
 }
 
 #day-senin:checked ~ .days-content-wrapper .senin-content,
@@ -226,73 +149,75 @@ body.dark-mode #day-minggu:checked ~ .days-nav label[for="day-minggu"] {
     display: block;
 }
 
-/* Target Quran Card */
-.quran-target-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid #198754;
-    padding: 15px 20px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px var(--shadow);
+.notebook-card {
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-left: 5px solid #198754; border-radius: 12px; padding: 20px;
+    box-shadow: 0 4px 10px var(--shadow); margin-bottom: 20px;
 }
-body.dark-mode .quran-target-card { border-left-color: #20c997; background: rgba(32, 201, 151, 0.05); }
+body.dark-mode .notebook-card { border-left-color: #20c997; }
 
-.quran-target-icon {
-    font-size: 1.6rem;
-    background: rgba(25, 135, 84, 0.08);
-    width: 45px;
-    height: 45px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+.notebook-header h4 { color: #0f5132; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+body.dark-mode .notebook-header h4 { color: #20c997; }
+
+.notebook-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.log-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; background: rgba(25, 135, 84, 0.05); border-radius: 8px;
+    font-size: 0.95rem; color: var(--text-main);
 }
-body.dark-mode .quran-target-icon { background: rgba(32, 201, 151, 0.1); }
+.empty-log { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
 
-.quran-target-text h5 { color: #198754; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2px; }
-body.dark-mode .quran-target-text h5 { color: #20c997; }
-.quran-target-text h4 { font-size: 1.1rem; color: var(--text-main); font-weight: 700; }
-body.dark-mode .quran-target-text h4 { color: #20c997; }
-.quran-target-text small { color: var(--text-muted); font-size: 0.85rem; }
+.btn-del-log { background: none; border: none; cursor: pointer; font-size: 0.85rem; opacity: 0.6; }
+.btn-del-log:hover { opacity: 1; }
 
-/* Habit Items / Amalan */
 .habit-list-container { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
 .habit-item { 
-    display: flex; 
-    align-items: center; 
-    padding: 12px 15px;
-    background: var(--bg-card);
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-    font-size: 1.05rem;
-    transition: all 0.2s ease;
+    display: flex; align-items: center; padding: 12px 15px; background: var(--bg-card);
+    border-radius: 10px; border: 1px solid var(--border-color); font-size: 1.05rem; transition: all 0.2s ease;
 }
-.habit-item:hover { border-color: #198754; transform: translateX(2px); }
-body.dark-mode .habit-item:hover { border-color: #20c997; }
-
 .habit-checkbox { width: 20px; height: 20px; margin-right: 12px; cursor: pointer; accent-color: #198754; }
 body.dark-mode .habit-checkbox { accent-color: #20c997; }
 .habit-icon { font-size: 1.2rem; margin-right: 8px; }
 .habit-item label { cursor: pointer; font-weight: 500; color: var(--text-main); width: 100%; }
 
 .habit-checkbox:checked + .habit-icon + label {
-    color: var(--text-muted);
-    text-decoration: line-through;
-    opacity: 0.6;
+    color: var(--text-muted); text-decoration: line-through; opacity: 0.6;
 }
 
-/* Progress bar bawaan asli agar fungsi JS tidak error */
-.progress-container { margin-top: 2rem; font-weight: bold; }
-.progress-bar-bg { background: var(--border-color); height: 12px; border-radius: 10px; margin-top: 8px; overflow: hidden; }
-.progress-bar-fill { background: #20c997; height: 100%; width: 0%; transition: width 0.3s; }
+/* ================================================== */
+/* 6. ASMAUL HUSNA GRID STYLING                      */
+/* ================================================== */
+.asmaul-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px; margin-top: 1.5rem;
+}
+
+.asmaul-card {
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: 12px; padding: 16px; text-align: center;
+    box-shadow: 0 3px 6px var(--shadow); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; transition: transform 0.2s;
+}
+.asmaul-card:hover { transform: translateY(-3px); border-color: #198754; }
+body.dark-mode .asmaul-card:hover { border-color: #20c997; }
+
+.asmaul-num {
+    font-size: 0.75rem; font-weight: bold; background: rgba(25, 135, 84, 0.1);
+    color: #198754; padding: 2px 8px; border-radius: 20px; margin-bottom: 8px;
+}
+body.dark-mode .asmaul-num { background: rgba(32, 201, 151, 0.1); color: #20c997; }
+
+.asmaul-arabic {
+    font-family: 'Amiri', serif; font-size: 1.8rem; font-weight: bold;
+    color: #0f5132; margin-bottom: 4px;
+}
+body.dark-mode .asmaul-arabic { color: #20c997; }
+
+.asmaul-latin { font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px; }
+.asmaul-indo { font-size: 0.8rem; color: var(--text-muted); }
 
 /* ================================================== */
-/* 6. JADWAL SHOLAT & ZONA WAKTU                      */
+/* 7. JADWAL SHOLAT                                   */
 /* ================================================== */
 .zone-selector { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
 .zone-btn { background: var(--bg-card); border: 1px solid #198754; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: 500; color: #198754; transition: all 0.2s; }
@@ -308,36 +233,146 @@ body.dark-mode .sholat-card { border-top-color: #20c997; }
 body.dark-mode .sholat-card p { color: #20c997; }
 
 /* ================================================== */
-/* 7. AL-QURAN & SURAH GRID                           */
+/* 8. AL-QURAN, BOOKMARK, TEKS LATIN & TAJWID LENGKAP */
 /* ================================================== */
+.bookmark-card {
+    background: #0f5132; color: white; padding: 14px 20px; border-radius: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; box-shadow: 0 4px 12px rgba(15, 81, 50, 0.2);
+}
+body.dark-mode .bookmark-card { background: #1e1e1e; border: 1px solid #20c997; }
+
+.btn-resume {
+    background: #20c997; color: #121212; border: none; padding: 8px 16px;
+    border-radius: 20px; font-weight: 700; cursor: pointer; transition: 0.2s;
+}
+.btn-resume:hover { transform: scale(1.05); }
+
+.bacaan-header-actions {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;
+}
+
+.toggle-latin-btn {
+    background: var(--bg-card); border: 1px solid #198754; color: #198754;
+    padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600;
+    transition: all 0.2s ease;
+}
+.toggle-latin-btn:hover { background: rgba(25, 135, 84, 0.1); }
+body.dark-mode .toggle-latin-btn { border-color: #20c997; color: #20c997; }
+
+.tajwid-guide {
+    display: flex; gap: 12px; font-size: 0.8rem; background: rgba(0,0,0,0.03);
+    padding: 10px 15px; border-radius: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;
+}
+body.dark-mode .tajwid-guide { background: rgba(255,255,255,0.04); }
+
+/* COLOR PALETTE TAJWID LENGKAP */
+.t-mad { color: #dc3545; font-weight: bold; }          /* Merah */
+.t-bighunnah { color: #198754; font-weight: bold; }    /* Hijau Tua */
+.t-bilaghunnah { color: #0d6efd; font-weight: bold; }  /* Biru */
+.t-qalqalah { color: #fd7e14; font-weight: bold; }     /* Orange */
+.t-iqlab { color: #6f42c1; font-weight: bold; }        /* Ungu */
+.t-ikhfa { color: #d9a000; font-weight: bold; }        /* Kuning Gold */
+
+body.dark-mode .t-bighunnah { color: #20c997; }
+body.dark-mode .t-ikhfa { color: #ffca2c; }
+
+.search-container { margin: 1.5rem 0; display: flex; justify-content: center; }
+.search-input {
+    width: 100%; max-width: 500px; padding: 12px 20px; border-radius: 50px;
+    border: 2px solid var(--border-color); background-color: var(--bg-card); color: var(--text-main);
+    font-size: 0.95rem; outline: none; box-shadow: 0 4px 10px var(--shadow); transition: all 0.3s ease;
+}
+.search-input:focus { border-color: #198754; box-shadow: 0 0 10px var(--accent-glow); }
+body.dark-mode .search-input:focus { border-color: #20c997; }
+
 .surah-box { display: flex; justify-content: space-between; align-items: center; text-align: left; cursor: pointer; transition: 0.2s; color: var(--text-main); }
 .surah-box:hover { border-color: #198754; background: #f0fdf4; transform: translateY(-2px); }
 body.dark-mode .surah-box:hover { border-color: #20c997; background: rgba(32, 201, 151, 0.02); }
 .arabic-title { font-family: 'Amiri', serif; font-size: 1.4rem; color: #0f5132; font-weight: bold; }
 body.dark-mode .arabic-title { color: #20c997; }
 
-/* Bacaan Ayat Container */
 .bacaan-container { background: var(--bg-card); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px var(--shadow); border: 1px solid var(--border-color); margin-top: 15px; }
-.back-btn { background: #198754; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-bottom: 2rem; transition: background 0.2s; }
+.back-btn { background: #198754; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
 .back-btn:hover { background: #146c43; }
 body.dark-mode .back-btn { background: #20c997; color: #121212; font-weight: bold; }
 
 .ayat-item { padding: 2rem 0; border-bottom: 1px dashed var(--border-color); }
-.arab-text { font-family: 'Amiri', serif; font-size: 1.8rem; text-align: right; direction: rtl; line-height: 2.5; color: var(--text-main); margin-bottom: 15px; }
-.ayat-num { font-size: 1.1rem; color: #198754; font-family: sans-serif; }
-.indo-text { font-size: 1rem; color: var(--text-muted); line-height: 1.5; }
+
+.arab-tajwid {
+    font-family: 'Amiri', serif; font-size: 2.2rem; font-weight: 700;
+    text-align: right; direction: rtl; line-height: 2.6; color: var(--text-main); margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.latin-text {
+    font-size: 1.05rem; color: #0f5132; font-weight: 600; margin-bottom: 8px; line-height: 1.5;
+}
+body.dark-mode .latin-text { color: #20c997; }
+
+.ayat-num { font-size: 1.2rem; color: #198754; font-family: sans-serif; }
+body.dark-mode .ayat-num { color: #20c997; }
+
+.indo-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; }
+
+.btn-bookmark-item {
+    background: transparent; border: 1px solid var(--border-color); color: var(--text-muted);
+    padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: 0.2s;
+}
+.btn-bookmark-item:hover { border-color: #198754; color: #198754; }
+
+.done-btn-container { text-align: center; margin-top: 3rem; margin-bottom: 1rem; }
+.done-btn {
+    background: #198754; color: white; border: none; padding: 14px 28px;
+    font-size: 1.05rem; font-weight: 700; border-radius: 50px; cursor: pointer;
+    box-shadow: 0 4px 15px rgba(25, 135, 84, 0.3); transition: all 0.2s ease;
+}
+.done-btn:hover { background: #146c43; transform: translateY(-2px); }
+body.dark-mode .done-btn { background: #20c997; color: #121212; box-shadow: 0 4px 15px rgba(32, 201, 151, 0.3); }
 
 /* ================================================== */
-/* 8. MISC MODULES (QUOTES, CALENDAR MODULE, FOOTER)  */
+/* 9. KALENDER STYLING                                */
+/* ================================================== */
+.calendar-box {
+    background: var(--bg-card); border-radius: 12px; padding: 20px;
+    border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow);
+}
+.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
+.calendar-header h3 { color: #0f5132; font-size: 1.3rem; font-weight: 700; }
+body.dark-mode .calendar-header h3 { color: #20c997; }
+.calendar-header button { background: var(--bg-card); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: 0.2s; color: var(--text-main); font-weight: 600; }
+.calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: 700; color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem; }
+.calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.cal-day { min-height: 90px; background: rgba(0,0,0,0.01); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px; display: flex; flex-direction: column; justify-content: space-between; }
+body.dark-mode .cal-day { background: rgba(255,255,255,0.02); }
+.cal-day.empty { background: transparent; border: none; }
+.cal-day.today { border: 2px solid #198754; background: rgba(25, 135, 84, 0.05); }
+body.dark-mode .cal-day.today { border-color: #20c997; }
+.day-number { font-weight: 700; font-size: 0.85rem; color: var(--text-main); }
+.badge-container { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
+.badge-tag { font-size: 0.62rem; padding: 2px 4px; border-radius: 4px; color: white; font-weight: 600; line-height: 1.1; display: block; }
+.bg-seninkamis { background: #198754; }
+.bg-jumat { background: #20c997; color: #121212; }
+.bg-ayyamul { background: #0d6efd; }
+.bg-puasakhusus { background: #6f42c1; }
+.bg-event { background: #fd7e14; }
+
+.calendar-legend { display: flex; justify-content: center; gap: 15px; margin-top: 20px; padding-top: 15px; border-top: 1px dashed var(--border-color); flex-wrap: wrap; }
+.legend-item { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+.legend-item i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.dot-seninkamis { background: #198754; }
+.dot-jumat { background: #20c997; }
+.dot-ayyamul { background: #0d6efd; }
+.dot-puasakhusus { background: #6f42c1; }
+.dot-event { background: #fd7e14; }
+
+/* ================================================== */
+/* 10. MISC & FOOTER                                  */
 /* ================================================== */
 .quote-box { margin-top: 25px; padding: 15px; border-left: 4px solid #198754; background: rgba(25, 135, 84, 0.05); border-radius: 0 8px 8px 0; font-style: italic; }
 body.dark-mode .quote-box { border-left-color: #20c997; background: rgba(32, 201, 151, 0.05); }
 .quote-title { font-weight: bold; font-style: normal; color: #0f5132; margin-bottom: 5px; font-size: 0.9rem; }
 body.dark-mode .quote-title { color: #20c997; }
-
-.calendar-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
-.agenda-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-.agenda-item { padding: 12px; background: rgba(0,0,0,0.02); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
-body.dark-mode .agenda-item { background: rgba(255,255,255,0.05); }
 
 footer { text-align: center; padding: 2rem; background: #212529; color: #999; margin-top: 4rem; border-top: 1px solid var(--border-color); }
